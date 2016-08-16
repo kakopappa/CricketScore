@@ -1,0 +1,15 @@
+{
+  "name": "CricScoreService",
+  "description": "Get the cricket score easy way",
+  "version": "0.0.1",
+  "author": {
+    "name": "Aruna Tennakoon",
+    "url": "https://github.com/kakopappa/"
+  },
+  "dependencies": {
+    "request": "2.74.0",
+    "memory-cache": "0.1.6",
+    "node-persist": "0.0.12",
+    "xmlreader": "0.2.3"
+  }
+}

@@ -3,6 +3,39 @@ var memCacheService = require('./MemCacheService.js');
 var objectGeneratorService = require('./ObjectGeneratorService.js');
 var persistenceService = require('./PersistenceService.js');
 
+var majorCountries = ["Australia", "Bangladesh", "England", "India", "New Zealand",
+                        "Pakistan", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe",
+                          "Ireland", "Scotland", "Afghanistan", "Kenya", "United Arab Emirates"];
+
+
+exports.getInternationalMatches  = function (callback) {
+    console.log("Geting matches ..");
+
+    getMatchesFromCacheOrSource(function (error, livescore) {
+      objectGeneratorService.getMatches(livescore, function(err, matches) {
+
+        if(err) {
+             callback(err, matches);
+        }
+        else {
+          var internationMatches = [];
+
+          for (var key in matches) {
+              var obj = matches[key];
+
+              if ((majorCountries.indexOf(obj._teamOne) > -1) ||
+                    majorCountries.indexOf(obj._teamTwo) > -1) {
+
+                  internationMatches.push(obj);
+              }
+          }
+
+          callback(err, internationMatches);
+        }
+      });
+    });
+}
+
 exports.getMatches  = function (callback) {
     console.log("Geting matches ..");
 
